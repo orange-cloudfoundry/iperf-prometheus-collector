@@ -28,11 +28,16 @@ async function getMeasurements(): Promise<string[]> {
         udpOptionStr = "--udp";
       }
 
+      test_starts_total++;
       const iperfCmd = await exec(`iperf3 -c ${target} ${udpOptionStr} --json ${options}`);
+      test_ends_total++;
       const result = JSON.parse(iperfCmd.stdout);
       if (result["error"]) {
         throw result["error"];
       }
+      measurements.push(formatMeasurement("iperf_starts_total", tags, test_starts_total));
+      measurements.push(formatMeasurement("iperf_ends_total", tags, test_ends_total));
+
       switch(protocol) {
         case "tcp":
           measurements.push(formatMeasurement("iperf_sent_bytes", tags, parseFloat(result["end"]["sum_sent"]["bytes"])));
@@ -71,6 +76,8 @@ async function getMeasurements(): Promise<string[]> {
 
 // string array of metrics, or null if collection is failing
 let latestMeasurements = [];
+let test_starts_total =0;
+let test_ends_total =0;
 setInterval(async () => {
   try {
     log("Refreshing metrics...");
