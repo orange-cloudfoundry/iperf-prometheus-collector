@@ -31,13 +31,6 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and export to ghcr
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          load: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-
       - name: Build and push image to github container registry
         uses: docker/build-push-action@v3
         with:
