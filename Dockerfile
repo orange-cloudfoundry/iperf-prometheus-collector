@@ -14,5 +14,5 @@ WORKDIR /app
 RUN apk add --no-cache iperf3
 
 COPY --from=builder /app/build /app/build
-
+RUN /app/build/main -h || echo ignore error
 CMD ["/app/build/main"]
