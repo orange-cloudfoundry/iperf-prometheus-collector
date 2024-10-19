@@ -18,6 +18,7 @@ RUN apk add --no-cache iperf3
 
 COPY --from=builder /app/build /app/build
 RUN apk add --no-cache file
+RUN apk add --no-cache bash
 RUN file  /app/build/main
 
 CMD ["/app/build/main"]
