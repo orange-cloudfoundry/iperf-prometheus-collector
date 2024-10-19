@@ -3,9 +3,10 @@ WORKDIR /app
 
 COPY go.mod Makefile ./
 COPY ./cmd ./cmd
-
+#See https://www.reddit.com/r/golang/comments/15o9trk/binsh_manager_not_found/
+#See https://www.reddit.com/r/golang/comments/pi97sp/what_is_the_consequence_of_using_cgo_enabled0/
+ENV CGO_ENABLE=0
 RUN make build
-RUN /app/build/main -h || echo ignore error during build container
 
 # ---
 
