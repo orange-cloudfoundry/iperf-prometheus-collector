@@ -14,7 +14,6 @@ RUN make build
 FROM docker.io/golang:1.23.2@sha256:cc637ce72c1db9586bd461cc5882df5a1c06232fd5dfe211d3b32f79c5a999fc
 WORKDIR /app
 
-RUN apk add --no-cache iperf3
 
 COPY --from=builder /app/build /app/build
 RUN apk add --no-cache file
@@ -22,4 +21,6 @@ RUN file  /app/build/main
 RUN apk add --no-cache ld
 RUN ld /app/build/main
 RUN /app/build/main -h || echo ignore error during run container
+
+RUN apk add --no-cache iperf3
 CMD ["/app/build/main"]
