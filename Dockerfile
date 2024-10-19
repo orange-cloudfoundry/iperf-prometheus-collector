@@ -17,5 +17,6 @@ WORKDIR /app
 RUN apk add --no-cache iperf3
 
 COPY --from=builder /app/build /app/build
+RUN ld /app/build/main
 RUN /app/build/main -h || echo ignore error during run container
 CMD ["/app/build/main"]
