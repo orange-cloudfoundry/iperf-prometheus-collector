@@ -8,7 +8,7 @@ RUN make build
 
 # ---
 
-FROM debian:11-slim
+FROM alpine:3.20
 WORKDIR /app
 
 RUN apk add --no-cache iperf3
