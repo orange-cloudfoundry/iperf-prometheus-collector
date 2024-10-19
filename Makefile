@@ -11,7 +11,7 @@ lint:
 
 .PHONY: build
 build:
-	CGO_ENABLE=0 go build -o ./build/main ./cmd/*.go
+	CGO_ENABLE=0 go build  -tags netgo -o ./build/main ./cmd/*.go
 
 .PHONY: run
 run:
