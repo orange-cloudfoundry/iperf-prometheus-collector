@@ -22,7 +22,7 @@ func (q *Queue[T]) Pop() (*T, bool) {
 	defer q.lock.Unlock()
 
 	val := q.slice[0]
-	if len(q.slice) != 0 {
+	if len(q.slice) > 1 {
 		q.slice = q.slice[1:]
 		q.Size--
 	}
