@@ -21,14 +21,11 @@ func (q *Queue[T]) Pop() (*T, bool) {
 	q.lock.Lock()
 	defer q.lock.Unlock()
 
-	if len(q.slice) == 0 {
-		return nil, false
-	}
-
 	val := q.slice[0]
-	q.slice = q.slice[1:]
-
-	q.Size--
+	if len(q.slice) != 0 {
+		q.slice = q.slice[1:]
+		q.Size--
+	}
 
 	return &val, true
 }
