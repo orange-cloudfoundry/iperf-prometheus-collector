@@ -54,5 +54,8 @@ func httpHandler(res http.ResponseWriter, req *http.Request) {
 		}
 
 		fmt.Fprintf(res, metric.Format())
+		if liveMetrics.isLastMetric() {
+			break
+		}
 	}
 }

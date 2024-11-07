@@ -29,3 +29,7 @@ func (q *Queue[T]) Pop() (*T, bool) {
 
 	return &val, true
 }
+
+func (q *Queue[T]) isLastMetric() bool {
+	return q.Size == 1
+}
